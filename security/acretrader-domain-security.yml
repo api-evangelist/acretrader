@@ -1,0 +1,37 @@
+generated: '2026-07-17'
+method: probed
+source: live DNS/TLS/HTTP probes of acretrader.com (no API baseURL/servers hosts in apis.yml)
+description: >-
+  AcreTrader publishes no public API and declares no baseURL/OpenAPI servers, so
+  the primary corporate web host acretrader.com was probed directly. Absence of a
+  record (CAA, DNSSEC, HSTS) is valid, expected data for a marketing/investment
+  site, not a gap in an API surface.
+hosts:
+  - host: acretrader.com
+    https: true
+    tls_version: TLSv1.3
+    cert_issuer: Google Trust Services (WR3)
+    cert_expires: Sep  7 06:28:46 2026 GMT
+    hsts: false
+    hsts_max_age: null
+    csp: false
+    server: UploadServer
+    note: >-
+      Served from Google Cloud (UploadServer signature). www.acretrader.com
+      redirects to the apex host.
+domains:
+  - domain: acretrader.com
+    dnssec: false
+    caa: []
+    spf: true
+    spf_record: >-
+      v=spf1 mx include:_spf.google.com ip4:152.70.150.118 ip4:129.213.11.79
+      include:spf.protection.outlook.com include:sendgrid.net -all
+    dmarc: true
+    dmarc_policy: quarantine
+    dmarc_rua: mailto:admin@acretrader.com
+    nameservers:
+      - ns-cloud-b1.googledomains.com
+      - ns-cloud-b2.googledomains.com
+      - ns-cloud-b3.googledomains.com
+      - ns-cloud-b4.googledomains.com

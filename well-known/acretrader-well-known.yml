@@ -1,0 +1,24 @@
+generated: '2026-07-17'
+method: probed
+source: live HTTP probes of the /.well-known/ surface on acretrader.com
+description: >-
+  Probe of the /.well-known/ discovery surface for AcreTrader's corporate host
+  (no API baseURL is declared). Every standard discovery path returned 404 -
+  AcreTrader exposes no security.txt, OIDC/OAuth metadata, api-catalog, or
+  ai-plugin manifest. Recorded for auditability; no real document was saved and
+  no WellKnown pointer is wired into apis.yml (nothing present to point at).
+hosts:
+  - host: https://acretrader.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /llms.txt
+        status: 404

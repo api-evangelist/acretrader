@@ -1,7 +1,24 @@
 aid: acretrader
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  source: []
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/acretrader.png
 name: Acretrader
-description: Acretrader is a company surfaced as a portfolio company of anthemis and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: AcreTrader is a farmland investment marketplace headquartered in Fayetteville, Arkansas that
+  lets investors buy fractional, passive ownership stakes in individual US row-crop and permanent-crop
+  farms. AcreTrader sources and vets each farm, then handles the legal entity, farm management, and administration
+  while investors earn returns from annual cash rent and long-term land appreciation. The company also
+  operates Acres, a land data and valuation tool, and serves farmers, advisors, and accredited investors.
+  Backed by Anthemis and surfaced into the API Evangelist network as a company profile; AcreTrader publishes
+  no public developer API at this time.
 url: https://raw.githubusercontent.com/api-evangelist/acretrader/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -14,9 +31,36 @@ created: '2026-07-17'
 modified: '2026-07-17'
 tags:
 - Company
+- Farmland
+- Investing
+- Alternative Investments
+- Real Estate
+- Fintech
+- Agriculture
+- Marketplace
 apis: []
+common:
+- type: Website
+  url: https://acretrader.com/
+- type: SignUp
+  url: https://acretrader.com/sign-up
+- type: TermsOfService
+  url: https://acretrader.com/company/terms
+- type: PrivacyPolicy
+  url: https://acretrader.com/company/privacy
+- type: Support
+  url: https://acretrader.com/company/contact-us
+- type: Blog
+  url: https://acretrader.com/newsroom
+- type: DomainSecurity
+  url: security/acretrader-domain-security.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
