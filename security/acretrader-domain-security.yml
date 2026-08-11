@@ -1,37 +1,62 @@
-generated: '2026-07-17'
+generated: '2026-08-10'
 method: probed
-source: live DNS/TLS/HTTP probes of acretrader.com (no API baseURL/servers hosts in apis.yml)
+source: live DNS/TLS/HTTP probes of acretrader.com and api.acretrader.com
 description: >-
-  AcreTrader publishes no public API and declares no baseURL/OpenAPI servers, so
-  the primary corporate web host acretrader.com was probed directly. Absence of a
-  record (CAA, DNSSEC, HSTS) is valid, expected data for a marketing/investment
-  site, not a gap in an API surface.
+  AcreTrader publishes no public developer API and declares no baseURL or OpenAPI
+  servers[], so the corporate host acretrader.com was probed directly, together with
+  api.acretrader.com — a live first-party backend host discovered in this round via a
+  first-party RSS link on the AcreTrader homepage. Absence of a record (CAA, DNSSEC,
+  HSTS) is valid, recorded data for an investment marketing site, not a gap in a
+  developer API surface.
 hosts:
-  - host: acretrader.com
-    https: true
-    tls_version: TLSv1.3
-    cert_issuer: Google Trust Services (WR3)
-    cert_expires: Sep  7 06:28:46 2026 GMT
-    hsts: false
-    hsts_max_age: null
-    csp: false
-    server: UploadServer
-    note: >-
-      Served from Google Cloud (UploadServer signature). www.acretrader.com
-      redirects to the apex host.
+- host: acretrader.com
+  https: true
+  tls_version: TLSv1.3
+  cert_issuer: Google Trust Services (WR3)
+  cert_expires: Nov  1 23:55:04 2026 GMT
+  hsts: false
+  hsts_max_age: null
+  csp: false
+  server: UploadServer
+  note: >-
+    Served from Google Cloud (UploadServer signature). Markup is pre-rendered HTML;
+    www.acretrader.com redirects to the apex host.
+- host: api.acretrader.com
+  https: true
+  http_status_root: 404
+  tls_version: TLSv1.3
+  cert_issuer: Google Trust Services (WR3)
+  cert_expires: Nov  7 11:13:56 2026 GMT
+  hsts: false
+  hsts_max_age: null
+  csp: false
+  server: null
+  note: >-
+    Google Cloud HTTPS load balancer with path-based routing ("service rules for the
+    path non-existent" on unmatched paths). /healthz returns 200 "alive". No
+    /.well-known/ document, no OpenAPI/Swagger and no GraphQL surface is served — see
+    well-known/acretrader-well-known.yml for the full probe table.
 domains:
-  - domain: acretrader.com
-    dnssec: false
-    caa: []
-    spf: true
-    spf_record: >-
-      v=spf1 mx include:_spf.google.com ip4:152.70.150.118 ip4:129.213.11.79
-      include:spf.protection.outlook.com include:sendgrid.net -all
-    dmarc: true
-    dmarc_policy: quarantine
-    dmarc_rua: mailto:admin@acretrader.com
-    nameservers:
-      - ns-cloud-b1.googledomains.com
-      - ns-cloud-b2.googledomains.com
-      - ns-cloud-b3.googledomains.com
-      - ns-cloud-b4.googledomains.com
+- domain: acretrader.com
+  dnssec: false
+  caa: []
+  spf: true
+  spf_record: >-
+    v=spf1 mx include:_spf.google.com ip4:152.70.150.118 ip4:129.213.11.79
+    include:spf.protection.outlook.com include:sendgrid.net -all
+  dmarc: true
+  dmarc_policy: quarantine
+  dmarc_rua: mailto:admin@acretrader.com
+  nameservers:
+  - ns-cloud-b1.googledomains.com
+  - ns-cloud-b2.googledomains.com
+  - ns-cloud-b3.googledomains.com
+  - ns-cloud-b4.googledomains.com
+  note: >-
+    A wildcard A record answers for every acretrader.com subdomain (34.111.30.82) — a
+    randomly generated subdomain resolves and returns the same response — so the
+    existence of developer./docs./status./app.acretrader.com is a DNS artifact, not
+    evidence of those services. That wildcard target answers with a Kubernetes API
+    server 403 ('system:anonymous cannot get path "/"'), which is an exposure worth
+    reporting to AcreTrader. api.acretrader.com is a distinct address (34.111.83.6)
+    and is a real service.

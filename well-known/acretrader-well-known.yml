@@ -1,24 +1,133 @@
-generated: '2026-07-17'
+generated: '2026-08-10'
 method: probed
-source: live HTTP probes of the /.well-known/ surface on acretrader.com
+source: live HTTP probes of the /.well-known/ surface on acretrader.com and api.acretrader.com
 description: >-
-  Probe of the /.well-known/ discovery surface for AcreTrader's corporate host
-  (no API baseURL is declared). Every standard discovery path returned 404 -
-  AcreTrader exposes no security.txt, OIDC/OAuth metadata, api-catalog, or
-  ai-plugin manifest. Recorded for auditability; no real document was saved and
-  no WellKnown pointer is wired into apis.yml (nothing present to point at).
+  Probe of the /.well-known/ discovery surface for both AcreTrader hosts — the corporate
+  site acretrader.com and api.acretrader.com, the first-party backend host discovered in
+  this round. Every standard discovery path returned 404 on both: AcreTrader serves no
+  security.txt, no OIDC/OAuth metadata, no api-catalog, no ai-plugin manifest, no A2A
+  agent card at either the canonical /.well-known/agent-card.json or the legacy
+  /.well-known/agent.json, and no llms.txt. Recorded for auditability; no real document
+  was saved, so NO WellKnown, SecurityTxt or AgentCard pointer is wired into apis.yml —
+  a recorded absence is data, not a served surface.
 hosts:
-  - host: https://acretrader.com
-    documents:
-      - path: /.well-known/security.txt
-        status: 404
-      - path: /.well-known/openid-configuration
-        status: 404
-      - path: /.well-known/oauth-authorization-server
-        status: 404
-      - path: /.well-known/api-catalog
-        status: 404
-      - path: /.well-known/ai-plugin.json
-        status: 404
-      - path: /llms.txt
-        status: 404
+- host: https://acretrader.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /security.txt
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /openapi.yaml
+    status: 404
+  - path: /swagger.json
+    status: 404
+  - path: /graphql
+    status: 404
+  - path: /api-docs
+    status: 404
+  - path: /docs
+    status: 404
+  - path: /developers
+    status: 404
+  - path: /robots.txt
+    status: 200
+    note: served, but carries no Sitemap-adjacent API or spec reference
+  - path: /sitemap.xml
+    status: 200
+    note: >-
+      101 KB sitemap, walked in full — every entry is marketing, newsroom or
+      learning-centre content. No developer, API, docs or status page exists.
+- host: https://api.acretrader.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /openapi.yaml
+    status: 404
+  - path: /swagger.json
+    status: 404
+  - path: /v1/openapi.json
+    status: 404
+  - path: /v1/swagger.json
+    status: 404
+  - path: /api-docs
+    status: 404
+  - path: /docs
+    status: 404
+  - path: /redoc
+    status: 404
+  - path: /swagger-ui
+    status: 404
+  - path: /graphql
+    status: 404
+  - path: /healthz
+    status: 200
+    note: 'plain-text liveness probe, body: "alive". Not a contract.'
+x-contract-discovery:
+  performed: '2026-08-10'
+  summary: >-
+    STEP 0b contract discovery run in full against both hosts. No REST OpenAPI at any
+    docs- or API-host root, no GraphQL surface to introspect, no MCP endpoint, and no A2A
+    agent card at either well-known path. api.acretrader.com is a live Google Cloud HTTPS
+    load balancer that does serve first-party JSON, but only an undocumented content
+    (CMS) surface — see observed_endpoints below.
+  observed_endpoints:
+  - url: https://api.acretrader.com/v1/cms/learn/rss
+    status: 200
+    content_type: text/xml; charset=utf-8
+    note: >-
+      Real, unauthenticated, first-party RSS feed for the AcreTrader Learning Center.
+      Linked directly from the acretrader.com homepage markup, so it is a published
+      surface. Wired into apis.yml as a BlogRSS pointer.
+  - url: https://api.acretrader.com/v1/cms/newsroom/rss
+    status: 200
+    content_type: text/xml; charset=utf-8
+    note: Newsroom RSS feed; currently returns an effectively empty channel (569 bytes).
+  - url: https://api.acretrader.com/v1/cms/
+    status: 200
+    content_type: application/json
+    note: >-
+      Undocumented JSON content endpoint backing the marketing site. AcreTrader publishes
+      no reference, no authentication guidance, no terms of use and no machine-readable
+      contract for it, and does not market an API. NO OpenAPI has been authored from it
+      and NO apis[] entry has been created — writing a spec for an internal endpoint the
+      provider never published would credit AcreTrader with a contract it does not offer.
+      Recorded here as observed evidence only.
+  wildcard_dns_caveat: >-
+    developer., docs., status. and app.acretrader.com all appear to resolve, but a
+    randomly generated subdomain resolves to the same address (34.111.30.82) and returns
+    the same body — a DNS wildcard. None of those four hosts exists as a service. Their
+    shared target answers with a Kubernetes API server 403, not a web app.

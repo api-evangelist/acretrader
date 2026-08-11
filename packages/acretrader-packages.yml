@@ -1,0 +1,71 @@
+generated: '2026-08-10'
+method: searched
+source: >-
+  npm registry (registry.npmjs.org), PyPI, RubyGems, crates.io, NuGet, Maven Central,
+  pkg.go.dev and the github.com/acretrader organization
+description: >-
+  AcreTrader publishes no API client library in any public registry, because it publishes
+  no public API. One first-party package does exist on npm under the @acretrader scope —
+  a Vue 2 form-validation helper extracted from the investor web app — but it is a
+  front-end utility, not a client for an AcreTrader API. It is recorded here with
+  api_client: false, and NO `SDKs` pointer is emitted in apis.yml: there is no API for an
+  SDK to wrap, and claiming one would be crediting a check that is not earned.
+registries_searched:
+- registry: npm
+  queries: ['acretrader', 'acres', 'scope:acretrader']
+  hits: 1
+- registry: pypi
+  queries: ['acretrader', 'acres']
+  hits: 0
+  note: >-
+    pypi.org/project/acres/ exists but is nipreps/acres ("Access resources on your
+    terms"), an unrelated neuroimaging utility. Not AcreTrader.
+- registry: rubygems
+  queries: ['acretrader', 'acres']
+  hits: 0
+- registry: crates.io
+  queries: ['acretrader']
+  hits: 0
+- registry: nuget
+  queries: ['acretrader']
+  hits: 0
+- registry: maven-central
+  queries: ['acretrader']
+  hits: 0
+- registry: pkg.go.dev
+  queries: ['acretrader']
+  hits: 0
+package_count: 1
+official_api_client_count: 0
+packages:
+- language: javascript
+  registry: npm
+  name: '@acretrader/validations'
+  url: https://www.npmjs.com/package/@acretrader/validations
+  install: npm install @acretrader/validations
+  official: true
+  api_client: false
+  version: 0.0.1
+  published: '2021-03-19'
+  registry_last_modified: '2022-04-04'
+  release_count: 1
+  license: ISC
+  repository: https://github.com/acretrader/frontend-validations
+  description: Form validations library based on Vue.js 2 reactivity system
+  note: >-
+    First-party — published under AcreTrader's own npm scope and pointing at a repo in
+    AcreTrader's GitHub organization. Not an API client. Currency signal: a single
+    release, 0.0.1, published 2021-03-19 and untouched since; it targets Vue 2, which
+    reached end of life on 2023-12-31. Effectively abandoned.
+github_organization:
+  url: https://github.com/acretrader
+  org_display_name: acres
+  created: '2018-04-08'
+  public_repos: 5
+  note: >-
+    Verified live (HTTP 200). All five public repositories are internal-tooling forks or
+    policy files — software-licence-policy, kratos-fork (Ory Kratos identity server),
+    acreops-gcsproxy-fork, acrelab-cdl, maptiler-sdk-js-fork. None is an SDK, a client
+    library, or an API specification. The organization display name is "acres", a legacy
+    of the period when AcreTrader and Acres.com were one company; see the x-lineage note
+    in apis.yml — Acres.com is now a separate business.

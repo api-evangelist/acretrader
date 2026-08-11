@@ -1,0 +1,34 @@
+generated: '2026-08-10'
+method: searched
+source: https://acretrader.com/faq
+description: >-
+  AcreTrader publishes no API plans, tiers, quotas or developer pricing of any kind,
+  because it publishes no public API. It is a Regulation D private-placement farmland
+  investment platform: what it prices is participation in individual farm offerings
+  (investment minimums and an annual management fee disclosed per offering to accredited
+  investors), not API consumption. There is no pricing page, no plan comparison, and no
+  metered developer product to record. plan_count is an honest zero, not a gap in
+  harvesting.
+plan_count: 0
+plans: []
+commercial_model:
+  type: private-placement-investment-platform
+  audience: accredited investors, farmers, and financial advisors
+  developer_pricing_published: false
+  pricing_page: null
+  note: >-
+    Offering-level economics (minimum investment, annual management fee, target hold
+    period) are disclosed per farm inside the authenticated investor portal and in the
+    Reg D offering documents, not on a public pricing page. Securities are offered
+    through North Capital Private Securities Corporation, a FINRA/SIPC member
+    broker-dealer that is not an affiliate of the AcreTrader platform.
+searched:
+- url: https://acretrader.com/faq
+  status: 200
+  found: no developer or API pricing
+- url: https://acretrader.com/resources/how-it-works
+  status: 200
+  found: no developer or API pricing
+- url: https://acretrader.com/sitemap.xml
+  status: 200
+  found: no /pricing, /plans or /developers page in the full 101 KB sitemap

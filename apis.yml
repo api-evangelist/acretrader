@@ -12,23 +12,42 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/acretrader.png
 name: Acretrader
-description: AcreTrader is a farmland investment marketplace headquartered in Fayetteville, Arkansas that
-  lets investors buy fractional, passive ownership stakes in individual US row-crop and permanent-crop
-  farms. AcreTrader sources and vets each farm, then handles the legal entity, farm management, and administration
-  while investors earn returns from annual cash rent and long-term land appreciation. The company also
-  operates Acres, a land data and valuation tool, and serves farmers, advisors, and accredited investors.
-  Backed by Anthemis and surfaced into the API Evangelist network as a company profile; AcreTrader publishes
-  no public developer API at this time.
+description: AcreTrader is a farmland investment platform headquartered in Fayetteville, Arkansas that lets
+  accredited investors buy fractional, passive ownership stakes in individual US row-crop, permanent-crop
+  and timberland farms. AcreTrader sources and vets each farm, then handles the legal entity, farm management
+  and administration while investors earn returns from annual cash rent and long-term land appreciation.
+  Securities are offered through North Capital Private Securities Corporation, a FINRA/SIPC member broker-dealer
+  that is not an affiliate of the platform. Since 2018 AcreTrader has enabled investment in over 140 farmland
+  properties spanning roughly 44,000 acres across 20 states, and its investment management arm, AcreTrader
+  Management LLC, reports net IRR of 9.4% to 30.3% on realized deals. Proterra Investment Partners LP acquired
+  AcreTrader in August 2025. AcreTrader publishes no public developer API, no developer portal and no
+  machine-readable specification; contract discovery was run in full against acretrader.com and
+  api.acretrader.com on 2026-08-10 and every discovery path returned 404.
 url: https://raw.githubusercontent.com/api-evangelist/acretrader/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - anthemis
+x-acquired-by: proterra-investment-partners
+x-acquired-date: '2025-08-12'
+x-lineage:
+  note: >-
+    AcreTrader and Acres.com (AcreMaps, LLC) were one company; Proterra Investment
+    Partners acquired AcreTrader FROM Acres.com on 2025-08-12, and the same announcement
+    states that Acres "will remain an independent company". Acres.com is therefore a
+    SEPARATE business and is not covered by this profile. Artifacts served on acres.com —
+    its published llms.txt, its Free/Plus/Pro/Enterprise pricing tiers, its SOC 2 Type II
+    attestation, and the "API Integrations" capability advertised on its Enterprise tier
+    — belong to Acres, not to AcreTrader, and are deliberately NOT wired here. Acres.com
+    is a separate harvest lead. AcreTrader's GitHub organization is still named "acres"
+    as a legacy of the shared history.
+  source: https://acretrader.com/newsroom/proterra-acquires-acretrader
+  verified: '2026-08-10'
 x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-08-10'
 tags:
 - Company
 - Farmland
@@ -38,6 +57,10 @@ tags:
 - Fintech
 - Agriculture
 - Marketplace
+- Farmland Investing
+- Accredited Investors
+- Private Placements
+- AgTech
 apis: []
 common:
 - type: Website
@@ -52,15 +75,61 @@ common:
   url: https://acretrader.com/company/contact-us
 - type: Blog
   url: https://acretrader.com/newsroom
+- type: BlogRSS
+  url: https://api.acretrader.com/v1/cms/learn/rss
+- type: Login
+  url: https://acretrader.com/sign-in
+- type: About
+  url: https://acretrader.com/company/about-us
+- type: FAQ
+  url: https://acretrader.com/faq
+- type: GitHubOrganization
+  url: https://github.com/acretrader
 - type: DomainSecurity
   url: security/acretrader-domain-security.yml
+- type: Packages
+  url: packages/acretrader-packages.yml
+- type: Plans
+  url: plans/acretrader-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/acretrader-rate-limits.yml
+- type: LLMsTxt
+  url: llms/acretrader-llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 x-enrichment:
-  date: '2026-07-19'
-  status: backfilled
+  date: '2026-08-10'
+  status: minimal
+  artifacts_added: 4
   pass: local-v1
-  note: backfilled from .gitignore signal + verified work evidence
+  note: >-
+    Full STEP 0b contract discovery run against acretrader.com and api.acretrader.com.
+    No OpenAPI, GraphQL, MCP, AsyncAPI or A2A agent card exists. Real finds: the
+    github.com/acretrader organization, one first-party npm package, and two first-party
+    RSS feeds served from api.acretrader.com. Corrected ownership — Proterra acquired
+    AcreTrader in Aug 2025 and Acres.com is now a separate company.
+x-coverage:
+  state: none
+  reason: no-developer-program
+  detail: >-
+    AcreTrader ships only an end-user accredited-investor portal — the 101 KB sitemap
+    contains no developer, API, docs or status page, and api.acretrader.com answers
+    /healthz but 404s every OpenAPI, GraphQL, MCP and /.well-known/ path, serving only an
+    undocumented CMS backend for the marketing site.
+  evidence:
+  - url: https://acretrader.com/llms.txt
+    status: 404
+  - url: https://acretrader.com/developers
+    status: 404
+  - url: https://api.acretrader.com/openapi.json
+    status: 404
+  - url: https://api.acretrader.com/graphql
+    status: 404
+  - url: https://api.acretrader.com/.well-known/agent-card.json
+    status: 404
+  - url: https://api.acretrader.com/healthz
+    status: 200
+  checked: '2026-08-10'

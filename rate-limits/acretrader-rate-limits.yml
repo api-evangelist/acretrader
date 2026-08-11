@@ -1,0 +1,33 @@
+generated: '2026-08-10'
+method: probed
+source: >-
+  live unauthenticated responses from api.acretrader.com plus a full search of
+  acretrader.com for published limits
+description: >-
+  AcreTrader documents no rate limits, because it documents no API. The one first-party
+  host that answers publicly, api.acretrader.com, was probed on its live content
+  endpoints and returns no rate-limit signalling headers at all — no X-RateLimit-*, no
+  RateLimit-* (RFC 9331 style), no Retry-After. An agent calling this surface has no
+  runtime budget signal to read. limit_count is an honest zero.
+limit_count: 0
+limits: []
+headers_observed:
+  x_ratelimit_family: false
+  ratelimit_family: false
+  retry_after: false
+  note: >-
+    Response headers on a 200 from https://api.acretrader.com/v1/cms/learn/rss were
+    content-type and server only. No throttling, quota or retry signal is emitted.
+exhaustion_status_code: null
+searched:
+- url: https://api.acretrader.com/v1/cms/learn/rss
+  status: 200
+  found: no rate-limit response headers
+- url: https://acretrader.com/sitemap.xml
+  status: 200
+  found: no developer, API or rate-limit documentation page exists
+- url: https://acretrader.com/robots.txt
+  status: 200
+  found: >-
+    no Crawl-delay and no API-related directive; the only crawl guidance published on the
+    host is absent
