@@ -64,7 +64,7 @@ tags:
 - Farmland
 - Investing
 - Alternative Investments
-- Real-Estate
+- Real Estate
 - Fintech
 - Agriculture
 - Marketplace
@@ -85,6 +85,7 @@ tags_raw:
 - Accredited Investors
 - Private Placements
 - AgTech
+- Real-Estate
 apis: []
 common:
 - type: Website
